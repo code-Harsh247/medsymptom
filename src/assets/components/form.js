@@ -32,7 +32,7 @@ const MultiStepForm = () => {
     };
 
     return (
-        <div className='bg-white h-auto md:w-2/3 lg:w-2/3 w-11/12 relative overflow-hidden'>
+        <div className='bg-white h-auto md:w-2/3 lg:w-2/3 w-11/12 relative overflow-hidden shadow-lg'>
             <div className={`transition-all duration-300 ease-in-out ${step === 1 ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}`}>
                 <div className='w-full h-auto px-6 py-4'>
                     <h1 className='font-gs text-3xl font-medium'>Step 1: Tell us about yourself</h1>
