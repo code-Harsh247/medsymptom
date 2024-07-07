@@ -1,5 +1,6 @@
 import React from 'react'
 import bgImg from '../images/FormBG.png'
+import Form from './form'
 
 
 const FormSection = () => {
@@ -7,7 +8,7 @@ const FormSection = () => {
     <section className="h-screen flex justify-center items-center"
     style={{ backgroundImage: `url(${bgImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
     id="formSection">
-        
+    <Form/>
     </section>
   )
 }
