@@ -37,3 +37,14 @@
 .font-gs {
   font-family: 'GS', sans-serif;
 }
+
+body::-webkit-scrollbar {
+    display: none;
+  }
+
+.visible {
+    visibility: visible;
+}
+.invisible {
+    visibility: hidden;
+}
