@@ -48,3 +48,9 @@ body::-webkit-scrollbar {
 .invisible {
     visibility: hidden;
 }
+
+.squareh {
+  width: auto;
+  height: 100%; 
+  aspect-ratio: 1 / 1;
+}
