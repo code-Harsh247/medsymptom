@@ -6,7 +6,7 @@ const symptoms = [
   // ... add more symptoms as needed
 ];
 
-const TagInput = () => {
+const TagInput = ({onTagsChange }) => {
   const [tags, setTags] = useState([]);
   const [input, setInput] = useState('');
   const [suggestions, setSuggestions] = useState([]);
@@ -25,6 +25,10 @@ const TagInput = () => {
       setSuggestions([]);
     }
   }, [input]);
+
+  useEffect(() => {
+    onTagsChange(tags);
+}, [tags]);
 
   const addTag = (tag) => {
     if (tag && !tags.includes(tag)) {
@@ -66,6 +70,9 @@ const TagInput = () => {
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       setSelectedIndex(prevIndex => (prevIndex > 0 ? prevIndex - 1 : -1));
+    } else if (e.key === 'Backspace' && input === '') {
+      e.preventDefault();
+      setTags(prevTags => prevTags.slice(0, prevTags.length - 1));
     }
   };
 
