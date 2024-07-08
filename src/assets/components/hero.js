@@ -5,12 +5,12 @@ const hero = () => {
   return (
     <section className="flex items-center justify-center md:justify-between h-screen bg-white">
       <div className="text-center md:text-left">
-        <h1 className="text-5xl font-gs font-medium mb-4 ml-5">
+        <h1 className="text-5xl font-gs font-medium mb-4 md:ml-5">
         Empower Your Health <br/>
         with Intelligent Symptom <br/>
         Checking</h1>
         <br/>
-        <p className="text-2xl font-gs font-light ml-5 text-{}">
+        <p className="text-2xl font-gs font-light md:ml-5">
         Identify potential health issues <br/>
         and learn what to do next.
         </p>
