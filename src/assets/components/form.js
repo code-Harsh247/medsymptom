@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import TagInput from './TagInput'; // Ensure this component is available
+import TagInput from './TagInput'; 
+import backIcon from '../images/back.svg'; //
 
 const MultiStepForm = () => {
     const [step, setStep] = useState(1);
@@ -12,7 +13,7 @@ const MultiStepForm = () => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        const newValue = Math.max(1, Number(value)); // Ensure value is not below 1
+        const newValue = Math.max(1, Number(value)); 
         setFormData(prevData => ({
             ...prevData,
             [name]: newValue
@@ -30,6 +31,10 @@ const MultiStepForm = () => {
     const nextStep = () => {
         setStep(prevStep => prevStep + 1);
     };
+
+    const goBack = () => {
+        setStep(prevStep => prevStep - 1);
+    }
 
     return (
         <div className='bg-white h-auto md:w-2/3 lg:w-2/3 w-11/12 relative overflow-hidden shadow-lg'>
@@ -84,14 +89,35 @@ const MultiStepForm = () => {
                 <button onClick={nextStep} className="float-right w-32 bg-[#1A1A1A] mr-8 mb-8 text-white px-4 py-2 font-gs rounded hover:bg-[#2A2A2A] transition-colors duration-200 ease-in-out active:scale-95">Next</button>
             </div>
             <div className={`absolute inset-0 transition-all duration-300 ease-in-out ${step === 2 ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}`}>
-                <div className='w-full h-auto px-6 py-4'>
+                <div className='w-full h-auto px-6 py-4 flex justify-between'>
                     <h1 className='font-gs text-3xl font-medium'>Step 2: Tell us about your symptoms</h1>
-                    <TagInput 
+                    <div className='w-12 h-10'>
+                        <img src={backIcon} alt="GoBack" className='w-full h-full' onClick={goBack}/>
+                    </div>
+                </div>
+                <div className="px-6 py-4">
+                    <label htmlFor="age" className="block mb-2 font-gs text-xl text-slate-600">Describe in your words, or start typing and choose from the dropdown list</label>
+                    <div className="flex flex-col items-start">
+                        <div className='flex'>
+                            <span className="text-sm font-gs mr-2">•</span>
+                            <p className="text-sm font-gs">
+                                Medical terms are the best but if you do not know them, just enter the symptoms in normal everyday language.
+                            </p>
+                        </div>
+                        <div className='flex'>
+                            <span className="text-sm font-gs mr-2">•</span>
+                            <p className="text-sm font-gs">
+                                Enter each symptom separately or put them all in a line separated by commas.
+                            </p>
+                        </div>
+                    </div>
+                    <br/>
+                    <TagInput
                         value={formData.symptoms}
                         onChange={value => setFormData(prev => ({ ...prev, symptoms: value }))}
                     />
-                    <button onClick={nextStep} className="float-right w-32 bg-[#1A1A1A] mr-8 mb-8 text-white px-4 py-2 font-gs rounded hover:bg-[#2A2A2A] transition-colors duration-200 ease-in-out active:scale-95">Next</button>
                 </div>
+                <button onClick={nextStep} className="float-right w-32 bg-[#1A1A1A] mr-8 mb-8 text-white px-4 py-2 font-gs rounded hover:bg-[#2A2A2A] transition-colors duration-200 ease-in-out active:scale-95">Next</button>
             </div>
         </div>
     );
