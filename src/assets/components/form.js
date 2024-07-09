@@ -70,7 +70,6 @@ const MultiStepForm = () => {
 
     const goBack = () => {
         setStep(prevStep => prevStep - 1);
-        setIsFormValid(false);
     }
 
     const printTest = () => {
