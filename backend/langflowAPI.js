@@ -73,7 +73,6 @@ class LangflowClient {
 async function getDiagnosis(age, gender, medicalHistory, symptoms) {
     const flowIdOrName = '34d289da-0b90-46aa-a0f9-c40812b38312';
     const inputValue = `${age}, ${gender}, [${medicalHistory.join()}], [${symptoms.join()}]`;
-    console.log("Input Value:", inputValue);
     const stream = false;
     const langflowClient = new LangflowClient(process.env.LANGFLOW_DOMAIN,
         process.env.LANGFLOW_API_KEY);

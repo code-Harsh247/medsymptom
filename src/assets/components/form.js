@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import TagInput from './TagInput';
+import ResultsComponent from './result';
 import backIcon from '../images/back.svg';
 
 const MultiStepForm = () => {
-    const [step, setStep] = useState(1);
+    const [step, setStep] = useState(2);
     const [formData, setFormData] = useState({
         age: '',
         gender: '',
@@ -77,7 +78,8 @@ const MultiStepForm = () => {
     }
 
     return (
-        <div className='bg-white h-auto md:w-2/3 w-11/12 relative overflow-hidden shadow-lg'>
+        <div className={`bg-white h-auto relative overflow-hidden shadow-lg
+         ${step === 3 ? 'w-11/12 h-3/4' : 'md:w-2/3 w-11/12'} transition-all duration-500 ease-in-out`}>
             <div className={`transition-all duration-300 ease-in-out ${step === 1 ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}`}>
                 <div className='w-full h-auto px-6 py-4'>
                     <h1 className='font-gs text-3xl font-medium'>Step 1: Tell us about yourself</h1>
@@ -167,13 +169,16 @@ const MultiStepForm = () => {
                     {errors.symptoms && <p className="text-red-500 text-sm mt-1">{errors.symptoms}</p>}
                 </div>
                 <button 
-                    onClick={printTest}
+                    onClick={nextStep}
                     disabled={!isFormValid}
                     className={`float-right w-32 mr-8 mb-8 text-white px-4 py-2 font-gs rounded transition-colors duration-200 ease-in-out active:scale-95 ${isFormValid ? 'bg-[#1A1A1A] hover:bg-[#2A2A2A]' : 'bg-gray-400 cursor-not-allowed'}`}
                 >
                     Next
                 </button>
             </div>
+            <div className={`absolute inset-0 transition-all duration-300 ease-in-out ${step === 3 ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}`}>
+                        <ResultsComponent/>
+            </div>  
         </div>
     );
 };
