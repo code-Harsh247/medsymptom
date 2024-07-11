@@ -85,6 +85,7 @@ const TagInput = ({onTagsChange }) => {
     }
   }, [selectedIndex]);
 
+
   return (
     <div className="w-full max-w-md">
       <div className="flex flex-wrap items-center border border-gray-300 rounded p-2">

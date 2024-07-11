@@ -4,19 +4,24 @@ import ResultsComponent from './result';
 import backIcon from '../images/back.svg';
 
 const MultiStepForm = () => {
-    const [step, setStep] = useState(2);
+    const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         age: '',
         gender: '',
-        medicalHistory: 'None',
+        medicalHistory: [],
         symptoms: []
     });
     const [errors, setErrors] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
 
     useEffect(() => {
+        if(step===3) console.log(formData);
+      }, [step]);
+    
+
+    useEffect(() => {
         validateForm();
-    }, [formData,step]);
+    }, [formData, step]);
 
     const validateForm = () => {
         let newErrors = {};
@@ -31,8 +36,8 @@ const MultiStepForm = () => {
                 newErrors.gender = 'Please select a gender';
                 isValid = false;
             }
-            if (!formData.medicalHistory) {
-                newErrors.medicalHistory = 'Please enter your medical history or "None"';
+            if (formData.medicalHistory.length===0) {
+                newErrors.medicalHistory = 'Please enter your medical history or Enter "None"';
                 isValid = false;
             }
         } else if (step === 2) {
@@ -54,6 +59,13 @@ const MultiStepForm = () => {
             [name]: newValue
         }));
     };
+
+    const handleMedicalHistoryChange = (newMedicalHistory) => {
+        setFormData(prevData => ({
+            ...prevData,
+            medicalHistory: newMedicalHistory
+        }));
+    }
 
     const handleSymptomsChange = (newSymptoms) => {
         setFormData(prevData => ({
@@ -117,13 +129,8 @@ const MultiStepForm = () => {
                 <div className="px-6 py-4 flex flex-col lg:flex-row justify-around">
                     <div className='w-full lg:w-1/2'>
                         <label className="block mb-2 font-gs text-xl text-slate-600">Past medical history</label>
-                        <input
-                            type="text"
-                            id="medicalHistory"
-                            name="medicalHistory"
-                            value={formData.medicalHistory}
-                            onChange={handleInputChange}
-                            className={`w-11/12 md:w-full p-2 border ${errors.medicalHistory ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:ring-1 focus:ring-black`}
+                        <TagInput
+                            onTagsChange={handleMedicalHistoryChange}
                         />
                         {errors.medicalHistory && <p className="text-red-500 text-sm mt-1">{errors.medicalHistory}</p>}
                     </div>
@@ -131,8 +138,8 @@ const MultiStepForm = () => {
                         <p className='text-sm py-4 lg:px-10'>Any relevant past medical history, including chronic conditions, surgeries, previous illnesses and allergies.</p>
                     </div>
                 </div>
-                <button 
-                    onClick={nextStep} 
+                <button
+                    onClick={nextStep}
                     disabled={!isFormValid}
                     className={`float-right w-32 mr-8 mb-8 text-white px-4 py-2 font-gs rounded transition-colors duration-200 ease-in-out active:scale-95 ${isFormValid ? 'bg-[#1A1A1A] hover:bg-[#2A2A2A]' : 'bg-gray-400 cursor-not-allowed'}`}
                 >
@@ -163,12 +170,12 @@ const MultiStepForm = () => {
                         </div>
                     </div>
                     <br />
-                    <TagInput 
-                    onTagsChange={handleSymptomsChange}
+                    <TagInput
+                        onTagsChange={handleSymptomsChange}
                     />
                     {errors.symptoms && <p className="text-red-500 text-sm mt-1">{errors.symptoms}</p>}
                 </div>
-                <button 
+                <button
                     onClick={nextStep}
                     disabled={!isFormValid}
                     className={`float-right w-32 mr-8 mb-8 text-white px-4 py-2 font-gs rounded transition-colors duration-200 ease-in-out active:scale-95 ${isFormValid ? 'bg-[#1A1A1A] hover:bg-[#2A2A2A]' : 'bg-gray-400 cursor-not-allowed'}`}
@@ -177,8 +184,8 @@ const MultiStepForm = () => {
                 </button>
             </div>
             <div className={`absolute inset-0 transition-all duration-300 ease-in-out ${step === 3 ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}`}>
-                        <ResultsComponent/>
-            </div>  
+                <ResultsComponent formInput={formData} step={step} />
+            </div>
         </div>
     );
 };
