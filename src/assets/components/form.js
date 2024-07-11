@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import TagInput from './TagInput';
 import ResultsComponent from './result';
 import backIcon from '../images/back.svg';
@@ -14,10 +14,10 @@ const MultiStepForm = () => {
     const [errors, setErrors] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
 
-    useEffect(() => {
-        if(step===3) console.log(formData);
-      }, [step]);
-    
+        // useEffect(() => {
+        //     if(step===3) console.log(formData);
+        //   }, [step]);
+        
 
     useEffect(() => {
         validateForm();
@@ -53,26 +53,34 @@ const MultiStepForm = () => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        const newValue = name === 'age' ? Math.max(1, Number(value)) : value;
-        setFormData(prevData => ({
-            ...prevData,
-            [name]: newValue
-        }));
+        if (name === 'age') {
+            // Allow empty string or numbers
+            const newValue = value === '' ? '' : Math.max(1, Number(value));
+            setFormData(prevData => ({
+                ...prevData,
+                [name]: newValue
+            }));
+        } else {
+            setFormData(prevData => ({
+                ...prevData,
+                [name]: value
+            }));
+        }
     };
 
-    const handleMedicalHistoryChange = (newMedicalHistory) => {
+    const handleMedicalHistoryChange = useCallback((newMedicalHistory) => {
         setFormData(prevData => ({
             ...prevData,
             medicalHistory: newMedicalHistory
         }));
-    }
-
-    const handleSymptomsChange = (newSymptoms) => {
+    }, []);
+    
+    const handleSymptomsChange = useCallback((newSymptoms) => {
         setFormData(prevData => ({
             ...prevData,
             symptoms: newSymptoms
         }));
-    };
+    }, []);
 
     const nextStep = () => {
         if (isFormValid) {
@@ -131,6 +139,7 @@ const MultiStepForm = () => {
                         <label className="block mb-2 font-gs text-xl text-slate-600">Past medical history</label>
                         <TagInput
                             onTagsChange={handleMedicalHistoryChange}
+                            placeholdertext="Type your medical history ..."
                         />
                         {errors.medicalHistory && <p className="text-red-500 text-sm mt-1">{errors.medicalHistory}</p>}
                     </div>
@@ -172,6 +181,7 @@ const MultiStepForm = () => {
                     <br />
                     <TagInput
                         onTagsChange={handleSymptomsChange}
+                        placeholdertext="Type a symptom ..."
                     />
                     {errors.symptoms && <p className="text-red-500 text-sm mt-1">{errors.symptoms}</p>}
                 </div>
@@ -184,7 +194,7 @@ const MultiStepForm = () => {
                 </button>
             </div>
             <div className={`absolute inset-0 transition-all duration-300 ease-in-out ${step === 3 ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}`}>
-                <ResultsComponent formInput={formData} step={step} />
+                <ResultsComponent formInput={formData} step={step} goBack={goBack}/>
             </div>
         </div>
     );
