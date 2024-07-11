@@ -9,9 +9,9 @@ const ResultsComponent = ({ formInput, step }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const cleanString = (str) => {
-        return str.replace(/\\"/g, '"').replace(/"\\/g, '"').replace(/\n/g, '');
-    };
+    // const cleanString = (str) => {
+    //     return str.replace(/\\"/g, '"').replace(/"\\/g, '"').replace(/\n/g, '');
+    // };
 
     // const convertStringToJsonFile = (inputString, outputFilePath) => {
     //     // Split the input string into separate JSON strings

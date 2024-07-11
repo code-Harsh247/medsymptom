@@ -7,35 +7,35 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const convertToJSON = (input) => {
-    try {
-        // Split the input string into an array of condition descriptions
-        const conditions = input.output.split('\n\n');
+// const convertToJSON = (input) => {
+//     try {
+//         // Split the input string into an array of condition descriptions
+//         const conditions = input.output.split('\n\n');
         
-        // Parse each condition into an object
-        const jsonOutput = conditions.map(condition => {
-            const lines = condition.split('\n');
-            const conditionObj = {};
-            lines.forEach(line => {
-                if (line.includes(':')) {
-                    let [key, value] = line.split(': ');
-                    key = key.replace(/^\d+\./, '').trim(); // Remove numbering if present
-                    // Remove extra quotes, backslashes, and trailing commas
-                    value = value.replace(/^"|"$/g, '').replace(/\\"/g, '"').replace(/\\$/, '').trim();
-                    conditionObj[key] = value;
-                }
-            });
-            return conditionObj;
-        }).filter(condition => Object.keys(condition).length > 0);  // Remove any empty objects
+//         // Parse each condition into an object
+//         const jsonOutput = conditions.map(condition => {
+//             const lines = condition.split('\n');
+//             const conditionObj = {};
+//             lines.forEach(line => {
+//                 if (line.includes(':')) {
+//                     let [key, value] = line.split(': ');
+//                     key = key.replace(/^\d+\./, '').trim(); // Remove numbering if present
+//                     // Remove extra quotes, backslashes, and trailing commas
+//                     value = value.replace(/^"|"$/g, '').replace(/\\"/g, '"').replace(/\\$/, '').trim();
+//                     conditionObj[key] = value;
+//                 }
+//             });
+//             return conditionObj;
+//         }).filter(condition => Object.keys(condition).length > 0);  // Remove any empty objects
 
-        // Return the structured JSON
-        return JSON.stringify(jsonOutput, null, 2);
-    }
-    catch (error) {
-        console.error('Error in convertToJSON:', error);
-        throw error;
-    }
-}
+//         // Return the structured JSON
+//         return JSON.stringify(jsonOutput, null, 2);
+//     }
+//     catch (error) {
+//         console.error('Error in convertToJSON:', error);
+//         throw error;
+//     }
+// }
 
 
 app.post('/diagnose', async (req, res) => {
