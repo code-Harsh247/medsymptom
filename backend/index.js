@@ -41,9 +41,11 @@ const convertToJSON = (input) => {
 app.post('/diagnose', async (req, res) => {
     try {
         const { age, gender, medicalHistory, symptoms } = req.body;
+        console.log(req.body);
         const output = await langflowAPI.getDiagnosis(age, gender, medicalHistory, symptoms);
-        const jsonOutput = convertToJSON({output});
-        res.send(jsonOutput);
+        // const jsonOutput = convertToJSON({output});
+        // console.log(jsonOutput);
+        res.send({output});
     } catch (error) {
         console.error('Error in /diagnose route:', error);
         res.status(500).json({ error: 'An error occurred while processing your request' });
