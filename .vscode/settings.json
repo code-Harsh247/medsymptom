@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/e3537e2b-ac8d-4413-a846-dff284e6aff4/resourceGroups/medSymptomAPI-rg/providers/Microsoft.Web/sites/medsymptomAPI",
+    "appService.deploySubpath": "."
+}
