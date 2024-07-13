@@ -3,6 +3,7 @@ import Loader from './Loader/Loader'
 import axios from './axiosConfig';
 import backIcon from '../images/back.svg';
 
+
 const ResultsComponent = ({ formInput, step, goBack }) => {
     const [diseases, setDiseases] = useState([]);
     const [selectedDisease, setSelectedDisease] = useState(null);
@@ -15,7 +16,7 @@ const ResultsComponent = ({ formInput, step, goBack }) => {
                 setLoading(true);
                 setError(null);
                 try {
-                    const response = await axios.post('http://localhost:4000/diagnose', formInput);
+                    const response = await axios.post(`https://medsymptomapi.azurewebsites.net/diagnose`, formInput);
                     console.log(response.data.output);
 
                     const diseasesArray = response.data.output.split('}\n\n{').map((str, index, array) => {
