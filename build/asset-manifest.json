@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e67218b8.css",
+    "main.js": "/static/js/main.f0fcb7a2.js",
+    "static/media/FormBG.png": "/static/media/FormBG.c5d740cd634d3a7617f7.png",
+    "static/media/GeneralSans-Italic.otf": "/static/media/GeneralSans-Italic.26ee6134ce1bdeebabfd.otf",
+    "static/media/steps.svg": "/static/media/steps.db66963fd7f31de5479eaf0eb754e9f3.svg",
+    "static/media/GeneralSans-Medium.otf": "/static/media/GeneralSans-Medium.9e7904e31d714524f2d9.otf",
+    "static/media/GeneralSans-Regular.otf": "/static/media/GeneralSans-Regular.8b8c806d335280408bfe.otf",
+    "static/media/GeneralSans-Bold.otf": "/static/media/GeneralSans-Bold.7d113a8107451af3d10f.otf",
+    "static/media/back.svg": "/static/media/back.b29afe7c62ca8b26d0b42148d096ddc8.svg",
+    "index.html": "/index.html",
+    "main.e67218b8.css.map": "/static/css/main.e67218b8.css.map",
+    "main.f0fcb7a2.js.map": "/static/js/main.f0fcb7a2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e67218b8.css",
+    "static/js/main.f0fcb7a2.js"
+  ]
+}

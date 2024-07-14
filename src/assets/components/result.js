@@ -16,7 +16,7 @@ const ResultsComponent = ({ formInput, step, goBack }) => {
                 setLoading(true);
                 setError(null);
                 try {
-                    const response = await axios.post(`https://medsymptomapi.azurewebsites.net/diagnose`, formInput);
+                    const response = await axios.post("https://medsymptomapi.azurewebsites.net/diagnose", formInput);
                     console.log(response.data.output);
 
                     const diseasesArray = response.data.output.split('}\n\n{').map((str, index, array) => {
@@ -51,7 +51,7 @@ const ResultsComponent = ({ formInput, step, goBack }) => {
     }
 
     return (
-        <div className="p-6 w-full mx-auto font-gs bg-white">
+        <div className="p-6 w-full h-auto mx-auto font-gs bg-white">
             <div className='w-full h-auto flex justify-between items-center mb-6'>
                 <h2 className="text-3xl font-medium">Here are your results:</h2>
                 <div className='w-12 h-10'>

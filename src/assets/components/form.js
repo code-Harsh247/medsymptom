@@ -98,8 +98,9 @@ const MultiStepForm = () => {
     }
 
     return (
-        <div className={`bg-white h-auto relative overflow-hidden shadow-lg
-         ${step === 3 ? 'w-11/12 h-3/4' : 'md:w-2/3 w-11/12'} transition-all duration-500 ease-in-out`}>
+        <div className={`bg-white relative overflow-hidden shadow-lg
+            ${step === 3 ? 'w-11/12 h-11/12 custom-scrollbar overflow-y-auto' : 'md:w-2/3 w-11/12 h-auto'} 
+            transition-all duration-500 ease-in-out`}>
             <div className={`transition-all duration-300 ease-in-out ${step === 1 ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}`}>
                 <div className='w-full h-auto px-6 py-4'>
                     <h1 className='font-gs text-3xl font-medium'>Step 1: Tell us about yourself</h1>
@@ -193,7 +194,8 @@ const MultiStepForm = () => {
                     Next
                 </button>
             </div>
-            <div className={`absolute inset-0 transition-all duration-300 ease-in-out ${step === 3 ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}`}>
+            <div className={`absolute inset-0 transition-all duration-300 ease-in-out 
+                ${step === 3 ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}`}>
                 <ResultsComponent formInput={formData} step={step} goBack={goBack}/>
             </div>
         </div>

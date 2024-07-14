@@ -50,26 +50,36 @@ const TagInput = ({ onTagsChange, placeholdertext }) => {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (input) {
+      addTag(input);
+      setInput('');
+    }
+  };
+
   return (
     <div className="w-full max-w-md">
-      <div className="flex flex-wrap items-center border border-gray-300 rounded p-2">
-        {tags.map(tag => (
-          <span key={tag} className="bg-blue-100 text-blue-800 px-2 py-1 rounded m-1 text-sm flex items-center">
-            {tag}
-            <button onClick={() => removeTag(tag)} className="ml-1 text-blue-600 font-bold">
-              ×
-            </button>
-          </span>
-        ))}
-        <input
-          type="text"
-          value={input}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyDown}
-          className="flex-grow outline-none p-1"
-          placeholder={placeholdertext}
-        />
-      </div>
+      <form onSubmit={handleSubmit}>
+        <div className="flex flex-wrap items-center border border-gray-300 rounded p-2">
+          {tags.map(tag => (
+            <span key={tag} className="bg-blue-100 text-blue-800 px-2 py-1 rounded m-1 text-sm flex items-center">
+              {tag}
+              <button type="button" onClick={() => removeTag(tag)} className="ml-1 text-blue-600 font-bold">
+                ×
+              </button>
+            </span>
+          ))}
+          <input
+            type="text"
+            value={input}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            className="flex-grow outline-none p-1"
+            placeholder={placeholdertext}
+          />
+        </div>
+      </form>
     </div>
   );
 };
